@@ -1,0 +1,24 @@
+{
+  "name": "electrongram",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder -mw"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "electron": "^7.1.9",
+    "electron-builder": "^22.2.0",
+    "electron-fetch": "^1.4.0",
+    "electron-store": "^5.1.0"
+  },
+  "build": {
+    "appId": "hm.index.instagramdesktop",
+    "mac": {
+      "category": "public.app-category.social-networking"
+    }
+  }
+}

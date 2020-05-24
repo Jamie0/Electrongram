@@ -155,6 +155,8 @@ function createWindow (partition) {
   // and load the index.html of the app.
   win.loadURL('https://www.instagram.com')
   win.webContents.on('did-finish-load', () => {
+    win.webContents.executeJavaScript("window.screen={orientation:{type:'portrait-primary',angle:0,onchange:null}};window.dispatchEvent(new Event('resize'));");
+
     let cookies = win.webContents.session.cookies;
     win.webContents.session.cookies.get({ url: 'https://www.instagram.com', name: 'ds_user_id' }).then((result) => {
       if (result && result[0]) {

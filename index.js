@@ -1,6 +1,7 @@
 const { app, BrowserWindow, Menu, session } = require('electron')
 const Store = require('electron-store');
 const fetch = require('electron-fetch').default;
+const path = require('path');
 
 const isMac = process.platform === 'darwin'
 
@@ -11,7 +12,7 @@ const AGENT_UA = "Mozilla/5.0 (Linux; Android 8.1.0; motorola one Build/OPKS28.6
 
 let WINDOWS = {};
 
-app.commandLine.appendSwitch('--enable-touch-events')
+app.commandLine.appendSwitch('enable-touch-events')
 
 function swapAccount (account) {
   createWindow(account.partition);
@@ -142,8 +143,9 @@ function createWindow (partition) {
     width: 450,
     height: 700,
     webPreferences: {
-      nodeIntegration: true,
-      session: session.fromPartition('persist:sess' + partition)
+      nodeIntegration: false,
+      session: session.fromPartition('persist:sess' + partition),
+      preload: path.join(__dirname, 'touch-emulator.js')
     },
     
   })
@@ -155,7 +157,7 @@ function createWindow (partition) {
   // and load the index.html of the app.
   win.loadURL('https://www.instagram.com')
   win.webContents.on('did-finish-load', () => {
-    win.webContents.executeJavaScript("window.screen={orientation:{type:'portrait-primary',angle:0,onchange:null}};window.dispatchEvent(new Event('resize'));");
+    win.webContents.executeJavaScript("TouchEmulator(); window.screen={orientation:{type:'portrait-primary',angle:0,onchange:null}};window.dispatchEvent(new Event('resize'));");
 
     let cookies = win.webContents.session.cookies;
     win.webContents.session.cookies.get({ url: 'https://www.instagram.com', name: 'ds_user_id' }).then((result) => {

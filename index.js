@@ -11,6 +11,8 @@ const AGENT_UA = "Mozilla/5.0 (Linux; Android 8.1.0; motorola one Build/OPKS28.6
 
 let WINDOWS = {};
 
+app.commandLine.appendSwitch('--enable-touch-events')
+
 function swapAccount (account) {
   createWindow(account.partition);
 }
@@ -163,6 +165,9 @@ function createWindow (partition) {
         updatePartitionUser(partition, '0')
       }
     });
+  });
+  win.on('closed', () => {
+    delete WINDOWS[partition];
   });
 }
 

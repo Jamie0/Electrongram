@@ -127,7 +127,8 @@ console.log('ass');
     function onMouse(touchType) {
         return function(ev) {
             // prevent mouse events
-            preventMouseEvents(ev);
+            if (ev.target.tagName != 'INPUT')
+              preventMouseEvents(ev);
 
             if (ev.which !== 1) {
                 return;

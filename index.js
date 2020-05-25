@@ -29,7 +29,7 @@ function updatePartitionUser (partition, uid) {
   if (uid === null) {
     let index = myAccounts.findIndex((a) => a.partition == partition);
     if (index > 0) {
-      myAccounts.splice(myAccounts, 1);
+      myAccounts.splice(index, 1);
     }
   } else {
     let index = myAccounts.findIndex((a) => a.partition == partition);
@@ -82,13 +82,13 @@ async function updateMenu () {
       { role: 'quit' }
     ]
   }] : []),
-  // { role: 'fileMenu' }
   {
     label: 'File',
     submenu: [
       isMac ? { role: 'close' } : { role: 'quit' }
     ]
   },
+  { role: 'editMenu' },
   {
     label: 'Accounts',
     submenu: [

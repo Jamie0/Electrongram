@@ -159,6 +159,8 @@ function createWindow (partition) {
   win.webContents.on('did-finish-load', () => {
     win.webContents.executeJavaScript("TouchEmulator(); window.screen={orientation:{type:'portrait-primary',angle:0,onchange:null}};window.dispatchEvent(new Event('resize'));");
 
+    win.webContents.insertCSS("div section canvas + canvas + canvas + header + div > span > span { min-height: 1px; }")
+
     let cookies = win.webContents.session.cookies;
     win.webContents.session.cookies.get({ url: 'https://www.instagram.com', name: 'ds_user_id' }).then((result) => {
       if (result && result[0]) {

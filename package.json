@@ -10,7 +10,7 @@
   "author": "",
   "license": "UNLICENSED",
   "devDependencies": {
-    "electron": "^7.1.9",
+    "electron": "^7.2.4",
     "electron-builder": "^22.2.0"
   }, "dependencies": {
     "electron-fetch": "^1.4.0",
